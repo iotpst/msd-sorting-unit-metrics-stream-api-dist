@@ -1,0 +1,151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MSD Sorting Unit Metrics Stream API",
+    "description": "Exposes metrics of a sorting unit.",
+    "contact": {
+      "name": "bierier"
+    },
+    "version": "0.1.0-rc.1"
+  },
+  "host": "server:8080",
+  "basePath": "MQTT",
+  "paths": {
+    "app.iotp.msd.sorting.unit.metrics.CarrierControllerMaster-state": {
+      "get": {
+        "summary": "Carrier Controller Master state",
+        "description": "Shows the current state of a carrier controller master of the sorting unit.<br /><br />Confidentiality: C1<br />Classification: P0",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierControllerMasterState"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.CarrierControllerSlave-state": {
+      "get": {
+        "summary": "Carrier Controller Slave state",
+        "description": "Shows the current state of a carrier controller slave of the sorting unit.<br /><br />Confidentiality: C1<br />Classification: P0",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierControllerSlaveState"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.CarrierAcceleration-event": {
+      "get": {
+        "summary": "Accleration metrics of a carrier",
+        "description": "Acceleration metrics of a carrier in the sorting unit.<br /><br />Confidentiality: C1<br />Classification: P0",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierAccelerationEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.CarrierChainForce-event": {
+      "get": {
+        "summary": "Force measured on chain of carriers",
+        "description": "Shows the current force measured in the chain of carriers<br /><br />Confidentiality: C1<br />Classification: P0",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierChainForceEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.PowerAnalyzer-event": {
+      "get": {
+        "summary": "Power consumption metrics of the sorting unit",
+        "description": "A power analyzer measures the current, voltage, power and energy consumption metrics of the sorting unit.<br /><br />Confidentiality: C1<br />Classification: P0",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/PowerAnalyzerEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.RunProfileProcessed-event": {
+      "get": {
+        "summary": "Result of a RunProfile execution",
+        "description": "The motor controller will trigger a profile execution by sending the RunProfile message. When the RunProfile  was executed by the carrier controller slave, a RunProfileProcessed message with the resulting execution state is returned.\n<br /><br />Confidentiality: C1<br />Classification: P0",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/RunProfileProcessedEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      }
+    }
+  },
+  "definitions": {
+    "$ref": [
+      "../ts/carrier-controller-master-state.ts",
+      "../ts/carrier-controller-slave-state.ts",
+      "../ts/carrier-acceleration-event.ts",
+      "../ts/carrier-chain-force-event.ts",
+      "../ts/power-analyzer-event.ts",
+      "../ts/run-profile-processed-event.ts"
+    ]
+  }
+}

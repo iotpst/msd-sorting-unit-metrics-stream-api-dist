@@ -1,0 +1,256 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "definitions": {
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    },
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "MAC address of the sending device, e.g. 2EC8957302CA",
+      "pattern": "[0-9,A-F]{12}",
+      "required": true
+    },
+    "sortingCenter": {
+      "$ref": "sorting-center.json",
+      "description": "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm",
+      "required": true
+    },
+    "sorterNumber": {
+      "$ref": "#/definitions/Int",
+      "description": "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm",
+      "minimum": 1,
+      "maximum": 9,
+      "required": true
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00",
+      "required": true
+    },
+    "group": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier.",
+      "required": true
+    },
+    "carrier": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id.",
+      "required": true
+    },
+    "unitId": {
+      "$ref": "#/definitions/Int",
+      "description": "The unit id of the power analyzer.",
+      "required": true
+    },
+    "voltageL1N": {
+      "type": "number",
+      "description": "Power analyzer metrics. \n V, 19000",
+      "required": true
+    },
+    "voltageL2N": {
+      "type": "number",
+      "description": "V, 19002",
+      "required": true
+    },
+    "voltageL3N": {
+      "type": "number",
+      "description": "V, 19004",
+      "required": true
+    },
+    "currentIL1": {
+      "type": "number",
+      "description": "A, 19012",
+      "required": true
+    },
+    "currentIL2": {
+      "type": "number",
+      "description": "A, 19014",
+      "required": true
+    },
+    "currentIL3": {
+      "type": "number",
+      "description": "A, 19016",
+      "required": true
+    },
+    "currentSum": {
+      "type": "number",
+      "description": "A, 19018",
+      "required": true
+    },
+    "realPowerP1L1N": {
+      "type": "number",
+      "description": "W, 19020",
+      "required": true
+    },
+    "realPowerP2L2N": {
+      "type": "number",
+      "description": "W, 19022",
+      "required": true
+    },
+    "realPowerP3L3N": {
+      "type": "number",
+      "description": "W, 19024",
+      "required": true
+    },
+    "realPowerSum": {
+      "type": "number",
+      "description": "W, 19026",
+      "required": true
+    },
+    "apparentPowerS1L1N": {
+      "type": "number",
+      "description": "VA, 19028",
+      "required": true
+    },
+    "apparentPowerS2L2N": {
+      "type": "number",
+      "description": "VA, 19030",
+      "required": true
+    },
+    "apparentPowerS3L3N": {
+      "type": "number",
+      "description": "VA, 19032",
+      "required": true
+    },
+    "apparentPowerSum": {
+      "type": "number",
+      "description": "VA, 19034",
+      "required": true
+    },
+    "reactivePowerQ1L1N": {
+      "type": "number",
+      "description": "var, 19036",
+      "required": true
+    },
+    "reactivePowerQ2L2N": {
+      "type": "number",
+      "description": "var, 19038    ",
+      "required": true
+    },
+    "reactivePowerQ3L3N": {
+      "type": "number",
+      "description": "var, 19040",
+      "required": true
+    },
+    "reactivePowerSum": {
+      "type": "number",
+      "description": "var, 19042",
+      "required": true
+    },
+    "realEnergyL1": {
+      "type": "number",
+      "description": "Wh, 19054",
+      "required": true
+    },
+    "realEnergyL2": {
+      "type": "number",
+      "description": "Wh, 19056",
+      "required": true
+    },
+    "realEnergyL3": {
+      "type": "number",
+      "description": "Wh, 19058",
+      "required": true
+    },
+    "realEnergySum": {
+      "type": "number",
+      "description": "Wh 19060",
+      "required": true
+    },
+    "apparentEnergyL1": {
+      "type": "number",
+      "description": "VAh, 19078",
+      "required": true
+    },
+    "apparentEnergyL2": {
+      "type": "number",
+      "description": "VAh, 19080",
+      "required": true
+    },
+    "apparentEnergyL3": {
+      "type": "number",
+      "description": "VAh, 19082",
+      "required": true
+    },
+    "apparentEnergySum": {
+      "type": "number",
+      "description": "VAh, 19084",
+      "required": true
+    },
+    "reactiveEnergyL1": {
+      "type": "number",
+      "description": "varh, 19086",
+      "required": true
+    },
+    "reactiveEnergyL2": {
+      "type": "number",
+      "description": "varh, 19088",
+      "required": true
+    },
+    "reactiveEnergyL3": {
+      "type": "number",
+      "description": "varh, 19090",
+      "required": true
+    },
+    "reactiveEnergySum": {
+      "type": "number",
+      "description": "varh, 19092",
+      "required": true
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingCenter",
+    "sorterNumber",
+    "timestamp",
+    "group",
+    "carrier",
+    "unitId",
+    "voltageL1N",
+    "voltageL2N",
+    "voltageL3N",
+    "currentIL1",
+    "currentIL2",
+    "currentIL3",
+    "currentSum",
+    "realPowerP1L1N",
+    "realPowerP2L2N",
+    "realPowerP3L3N",
+    "realPowerSum",
+    "apparentPowerS1L1N",
+    "apparentPowerS2L2N",
+    "apparentPowerS3L3N",
+    "apparentPowerSum",
+    "reactivePowerQ1L1N",
+    "reactivePowerQ2L2N",
+    "reactivePowerQ3L3N",
+    "reactivePowerSum",
+    "realEnergyL1",
+    "realEnergyL2",
+    "realEnergyL3",
+    "realEnergySum",
+    "apparentEnergyL1",
+    "apparentEnergyL2",
+    "apparentEnergyL3",
+    "apparentEnergySum",
+    "reactiveEnergyL1",
+    "reactiveEnergyL2",
+    "reactiveEnergyL3",
+    "reactiveEnergySum"
+  ],
+  "additionalProperties": false,
+  "$id": "#PowerAnalyzerEvent",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.PowerAnalyzerEvent",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

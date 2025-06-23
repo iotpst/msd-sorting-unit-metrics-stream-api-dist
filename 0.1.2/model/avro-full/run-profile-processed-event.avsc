@@ -1,0 +1,75 @@
+{
+  "namespace": "RunProfileProcessedEvent",
+  "name": "main",
+  "type": "record",
+  "fields": [
+    {
+      "name": "deviceId",
+      "doc": "MAC address of the sending device, e.g. 2EC8957302CA",
+      "type": "string"
+    },
+    {
+      "name": "sortingCenter",
+      "doc": "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm",
+      "type": "string"
+    },
+    {
+      "name": "sorterNumber",
+      "doc": "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm",
+      "type": "int"
+    },
+    {
+      "name": "timestamp",
+      "doc": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00",
+      "type": "string"
+    },
+    {
+      "name": "serialNumber",
+      "doc": "The serial number of the carrier.",
+      "type": "string"
+    },
+    {
+      "name": "group",
+      "doc": "The group id of the carrier.",
+      "type": "int"
+    },
+    {
+      "name": "carrier",
+      "doc": "The carrier id.",
+      "type": "int"
+    },
+    {
+      "name": "profileId",
+      "doc": "The id of the processed RunProfile.",
+      "type": "int"
+    },
+    {
+      "name": "state",
+      "doc": "Resulting state of the RunProfile execution.",
+      "type": "string"
+    },
+    {
+      "name": "errors",
+      "doc": "Errors resulting from the RunProfile execution (state = CSS_ERROR), \r\ne.g. over / under voltage, over temperature, stalled motor, etc. conditions.",
+      "type": {
+        "type": "array",
+        "items": {
+          "type": "record",
+          "name": "Error",
+          "fields": [
+            {
+              "name": "code",
+              "doc": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>",
+              "type": "int"
+            },
+            {
+              "name": "message",
+              "doc": "",
+              "type": "string"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

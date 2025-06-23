@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema#",
+  "definitions": {},
+  "type": "string",
+  "enum": [
+    "PROCESSED",
+    "WRONG_MODE",
+    "FORMAT_ERROR",
+    "CANCELLED_BY_MC",
+    "DENIED_BY_CCS",
+    "UNKNOWN_PROFILE_ID",
+    "TIMING_TO_LATE",
+    "TIMEOUT",
+    "CCS_ERROR",
+    "CCS_IS_BUSY",
+    "GENERAL_ERROR"
+  ],
+  "id": "State",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.State",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    },
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "MAC address of the sending device, e.g. 2EC8957302CA",
+      "pattern": "[0-9,A-F]{12}"
+    },
+    "sortingCenter": {
+      "$ref": "sorting-center.json",
+      "description": "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+    },
+    "sorterNumber": {
+      "$ref": "#/definitions/Int",
+      "description": "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm",
+      "minimum": 1,
+      "maximum": 9
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00"
+    },
+    "serialNumber": {
+      "type": "string",
+      "description": "The serial number of the carrier.",
+      "pattern": "[0-9,A-Z,a-z]{10} "
+    },
+    "group": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier."
+    },
+    "carrier": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id."
+    },
+    "connected": {
+      "type": "boolean",
+      "description": "True, if updates have been received from the CCM in the last 60 seconds."
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "error.json"
+      },
+      "description": "Errors received from the CCM. "
+    },
+    "infos": {
+      "type": "array",
+      "items": {
+        "$ref": "info.json"
+      },
+      "description": "Infos received from the CCM."
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingCenter",
+    "sorterNumber",
+    "timestamp",
+    "serialNumber",
+    "group",
+    "carrier",
+    "connected",
+    "errors",
+    "infos"
+  ],
+  "additionalProperties": false,
+  "id": "CarrierControllerMasterState",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CarrierControllerMasterState",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

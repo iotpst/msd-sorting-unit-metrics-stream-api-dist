@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "code": {
+      "$ref": "#/definitions/Int"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "code",
+    "message"
+  ],
+  "additionalProperties": false,
+  "id": "Error",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.Error",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

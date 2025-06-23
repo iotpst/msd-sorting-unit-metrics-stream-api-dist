@@ -1,0 +1,123 @@
+{
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "MAC address of the sending device, e.g. 2EC8957302CA",
+      "pattern": "[0-9,A-F]{12}"
+    },
+    "sortingCenter": {
+      "$ref": "#/definitions/SortingCenter",
+      "description": "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+    },
+    "sorterNumber": {
+      "$ref": "#/definitions/Int",
+      "description": "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm",
+      "minimum": 1,
+      "maximum": 9
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00"
+    },
+    "serialNumber": {
+      "type": "string",
+      "description": "The serial number of the carrier.",
+      "pattern": "[0-9,A-Z,a-z]{10} "
+    },
+    "group": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier."
+    },
+    "carrier": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id."
+    },
+    "profileId": {
+      "$ref": "#/definitions/Int",
+      "description": "The id of the processed RunProfile."
+    },
+    "state": {
+      "$ref": "#/definitions/State",
+      "description": "Resulting state of the RunProfile execution."
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Error"
+      },
+      "description": "Errors resulting from the RunProfile execution (state = CSS_ERROR), \r\ne.g. over / under voltage, over temperature, stalled motor, etc. conditions."
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingCenter",
+    "sorterNumber",
+    "timestamp",
+    "serialNumber",
+    "group",
+    "carrier",
+    "profileId",
+    "state",
+    "errors"
+  ],
+  "additionalProperties": false,
+  "$id": "#RunProfileProcessedEvent",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "definitions": {
+    "SortingCenter": {
+      "type": "string",
+      "enum": [
+        "HRK",
+        "VET",
+        "CAD",
+        "UTZ",
+        "PRA"
+      ],
+      "$id": "#SortingCenter"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    },
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "State": {
+      "type": "string",
+      "enum": [
+        "PROCESSED",
+        "WRONG_MODE",
+        "FORMAT_ERROR",
+        "CANCELLED_BY_MC",
+        "DENIED_BY_CCS",
+        "UNKNOWN_PROFILE_ID",
+        "TIMING_TO_LATE",
+        "TIMEOUT",
+        "CCS_ERROR",
+        "CCS_IS_BUSY",
+        "GENERAL_ERROR"
+      ],
+      "$id": "#State"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "$ref": "#/definitions/Int"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "additionalProperties": false,
+      "$id": "#Error"
+    }
+  }
+}

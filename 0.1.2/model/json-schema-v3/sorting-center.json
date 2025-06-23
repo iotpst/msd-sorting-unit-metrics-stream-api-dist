@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-03/schema#",
+  "definitions": {},
+  "type": "string",
+  "enum": [
+    "HRK",
+    "VET",
+    "CAD",
+    "UTZ",
+    "PRA"
+  ],
+  "id": "SortingCenter",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.SortingCenter",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}
