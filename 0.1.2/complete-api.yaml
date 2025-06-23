@@ -1,0 +1,573 @@
+swagger: '2.0'
+info:
+  title: 'MSD Sorting Unit Metrics Stream API'
+  description: 'Exposes metrics of a sorting unit.'
+  contact:
+    name: bierier
+  version: 0.1.0-rc.1
+host: 'server:8080'
+basePath: MQTT
+paths:
+  app.iotp.msd.sorting.unit.metrics.CarrierControllerMaster-state:
+    get:
+      summary: 'Carrier Controller Master state'
+      description: 'Shows the current state of a carrier controller master of the sorting unit.'
+      tags:
+        - app.iotp.msd.sorting.unit.metrics
+      responses:
+        '200':
+          schema: {type: array, $ref: '#/definitions/CarrierControllerMasterState'}
+    x-data:
+      confidentiality: C1
+      classification: P0
+  app.iotp.msd.sorting.unit.metrics.CarrierControllerSlave-state:
+    get:
+      summary: 'Carrier Controller Slave state'
+      description: 'Shows the current state of a carrier controller slave of the sorting unit.'
+      tags:
+        - app.iotp.msd.sorting.unit.metrics
+      responses:
+        '200':
+          schema: {type: array, $ref: '#/definitions/CarrierControllerSlaveState'}
+    x-data:
+      confidentiality: C1
+      classification: P0
+  app.iotp.msd.sorting.unit.metrics.CarrierAcceleration-event:
+    get:
+      summary: 'Accleration metrics of a carrier'
+      description: 'Acceleration metrics of a carrier in the sorting unit.'
+      tags:
+        - app.iotp.msd.sorting.unit.metrics
+      responses:
+        '200':
+          schema: {type: array, $ref: '#/definitions/CarrierAccelerationEvent'}
+    x-data:
+      confidentiality: C1
+      classification: P0
+  app.iotp.msd.sorting.unit.metrics.CarrierChainForce-event:
+    get:
+      summary: 'Force measured on chain of carriers'
+      description: 'Shows the current force measured in the chain of carriers'
+      tags:
+        - app.iotp.msd.sorting.unit.metrics
+      responses:
+        '200':
+          schema: {type: array, $ref: '#/definitions/CarrierChainForceEvent'}
+    x-data:
+      confidentiality: C1
+      classification: P0
+  app.iotp.msd.sorting.unit.metrics.PowerAnalyzer-event:
+    get:
+      summary: 'Power consumption metrics of the sorting unit'
+      description: 'A power analyzer measures the current, voltage, power and energy consumption metrics of the sorting unit.'
+      tags:
+        - app.iotp.msd.sorting.unit.metrics
+      responses:
+        '200':
+          schema: {type: array, $ref: '#/definitions/PowerAnalyzerEvent'}
+    x-data:
+      confidentiality: C1
+      classification: P0
+  app.iotp.msd.sorting.unit.metrics.RunProfileProcessed-event:
+    get:
+      summary: 'Result of a RunProfile execution'
+      description: "The motor controller will trigger a profile execution by sending the RunProfile message. When the RunProfile  was executed by the carrier controller slave, a RunProfileProcessed message with the resulting execution state is returned.\n"
+      tags:
+        - app.iotp.msd.sorting.unit.metrics
+      responses:
+        '200':
+          schema: {type: array, $ref: '#/definitions/RunProfileProcessedEvent'}
+    x-data:
+      confidentiality: C1
+      classification: P0
+definitions:
+  Int:
+    type: integer
+    description: '<a href="https://swagger.io/docs/specification/data-models/data-types/#numbers">Number @asType integer</a>'
+  DateTime:
+    type: string
+    description: "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>."
+    format: date-time
+  CarrierAccelerationEvent:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: 'MAC address of the sending device, e.g. 2EC8957302CA'
+        pattern: '[0-9,A-F]{12}'
+      sortingCenter:
+        $ref: '#/definitions/SortingCenter'
+        description: "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+      sorterNumber:
+        $ref: '#/definitions/Int'
+        description: "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm"
+        minimum: 1
+        maximum: 9
+      timestamp:
+        $ref: '#/definitions/DateTime'
+        description: 'Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00'
+      group:
+        $ref: '#/definitions/Int'
+        description: 'The group id of the carrier.'
+      carrier:
+        $ref: '#/definitions/Int'
+        description: 'The carrier id.'
+      position:
+        $ref: '#/definitions/Int'
+        description: 'The position in mm of the CCM on the sorting unit.'
+      sensorId:
+        $ref: '#/definitions/Int'
+        description: 'The sensor id of the acceleration sensor.'
+      accelerationX:
+        $ref: '#/definitions/Int'
+        description: 'X-axis acceleration in m/s^2.'
+      accelerationY:
+        $ref: '#/definitions/Int'
+        description: 'Y-axis acceleration in m/s^2.'
+      accelerationZ:
+        $ref: '#/definitions/Int'
+        description: 'Z-axis acceleration in m/s^2.'
+      accelerationXMin:
+        $ref: '#/definitions/Int'
+        description: 'X-axis acceleration minimum in m/s^2.'
+      accelerationYMin:
+        $ref: '#/definitions/Int'
+        description: 'Y-axis acceleration minimum in m/s^2.'
+      accelerationZMin:
+        $ref: '#/definitions/Int'
+        description: 'Z-axis acceleration minimum in m/s^2.'
+      accelerationXMax:
+        $ref: '#/definitions/Int'
+        description: 'X-axis acceleration maximum in m/s^2.'
+      accelerationYMax:
+        $ref: '#/definitions/Int'
+        description: 'Y-axis acceleration maximum in m/s^2.'
+      accelerationZMax:
+        $ref: '#/definitions/Int'
+        description: 'Z-axis acceleration maximum in m/s^2.'
+      connected:
+        type: boolean
+        description: 'True, if updates have been received from the CCM in the last 60 seconds.'
+    required:
+      - deviceId
+      - sortingCenter
+      - sorterNumber
+      - timestamp
+      - group
+      - carrier
+      - position
+      - sensorId
+      - accelerationX
+      - accelerationY
+      - accelerationZ
+      - accelerationXMin
+      - accelerationYMin
+      - accelerationZMin
+      - accelerationXMax
+      - accelerationYMax
+      - accelerationZMax
+      - connected
+    additionalProperties: false
+  CarrierChainForceEvent:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: 'MAC address of the sending device, e.g. 2EC8957302CA'
+        pattern: '[0-9,A-F]{12}'
+      sortingCenter:
+        $ref: '#/definitions/SortingCenter'
+        description: "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+      sorterNumber:
+        $ref: '#/definitions/Int'
+        description: "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm"
+        minimum: 1
+        maximum: 9
+      timestamp:
+        $ref: '#/definitions/DateTime'
+        description: 'Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00'
+      group:
+        $ref: '#/definitions/Int'
+        description: 'The group id of the carrier.'
+      carrier:
+        $ref: '#/definitions/Int'
+        description: 'The carrier id.'
+      position:
+        $ref: '#/definitions/Int'
+        description: 'The position in mm of the CCM on the sorting unit.'
+      sensorId:
+        $ref: '#/definitions/Int'
+        description: 'The sensor id of the acceleration sensor.'
+      force:
+        $ref: '#/definitions/Int'
+        description: 'Force in Newton measured by the chain force sensor.'
+    required:
+      - deviceId
+      - sortingCenter
+      - sorterNumber
+      - timestamp
+      - group
+      - carrier
+      - position
+      - sensorId
+      - force
+    additionalProperties: false
+  CarrierControllerMasterState:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: 'MAC address of the sending device, e.g. 2EC8957302CA'
+        pattern: '[0-9,A-F]{12}'
+      sortingCenter:
+        $ref: '#/definitions/SortingCenter'
+        description: "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+      sorterNumber:
+        $ref: '#/definitions/Int'
+        description: "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm"
+        minimum: 1
+        maximum: 9
+      timestamp:
+        $ref: '#/definitions/DateTime'
+        description: 'Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00'
+      serialNumber:
+        type: string
+        description: 'The serial number of the carrier.'
+        pattern: '[0-9,A-Z,a-z]{10} '
+      group:
+        $ref: '#/definitions/Int'
+        description: 'The group id of the carrier.'
+      carrier:
+        $ref: '#/definitions/Int'
+        description: 'The carrier id.'
+      connected:
+        type: boolean
+        description: 'True, if updates have been received from the CCM in the last 60 seconds.'
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/Error'
+        description: 'Errors received from the CCM. '
+      infos:
+        type: array
+        items:
+          $ref: '#/definitions/Info'
+        description: 'Infos received from the CCM.'
+    required:
+      - deviceId
+      - sortingCenter
+      - sorterNumber
+      - timestamp
+      - serialNumber
+      - group
+      - carrier
+      - connected
+      - errors
+      - infos
+    additionalProperties: false
+  CarrierControllerSlaveState:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: 'MAC address of the sending device, e.g. 2EC8957302CA'
+        pattern: '[0-9,A-F]{12}'
+      sortingCenter:
+        $ref: '#/definitions/SortingCenter'
+        description: "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+      sorterNumber:
+        $ref: '#/definitions/Int'
+        description: "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm"
+        minimum: 1
+        maximum: 9
+      timestamp:
+        $ref: '#/definitions/DateTime'
+        description: 'Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00'
+      serialNumber:
+        type: string
+        description: 'The serial number of the carrier.'
+        pattern: '[0-9,A-Z,a-z]{10} '
+      group:
+        $ref: '#/definitions/Int'
+        description: 'The group id of the carrier.'
+      carrier:
+        $ref: '#/definitions/Int'
+        description: 'The carrier id.'
+      state:
+        $ref: '#/definitions/State'
+        description: 'The current state of the carrier controller slave.'
+      connected:
+        type: boolean
+        description: 'True, if updates have been received from the CCM in the last 60 seconds.'
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/Error'
+        description: 'Errors received from the CCS. '
+    required:
+      - deviceId
+      - sortingCenter
+      - sorterNumber
+      - timestamp
+      - serialNumber
+      - group
+      - carrier
+      - state
+      - connected
+      - errors
+    additionalProperties: false
+  Error:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/Int'
+      message:
+        type: string
+    required:
+      - code
+      - message
+    additionalProperties: false
+  Info:
+    type: object
+    properties:
+      code:
+        $ref: '#/definitions/Int'
+      message:
+        type: string
+    required:
+      - code
+      - message
+    additionalProperties: false
+  PowerAnalyzerEvent:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: 'MAC address of the sending device, e.g. 2EC8957302CA'
+        pattern: '[0-9,A-F]{12}'
+      sortingCenter:
+        $ref: '#/definitions/SortingCenter'
+        description: "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+      sorterNumber:
+        $ref: '#/definitions/Int'
+        description: "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm"
+        minimum: 1
+        maximum: 9
+      timestamp:
+        $ref: '#/definitions/DateTime'
+        description: 'Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00'
+      group:
+        $ref: '#/definitions/Int'
+        description: 'The group id of the carrier.'
+      carrier:
+        $ref: '#/definitions/Int'
+        description: 'The carrier id.'
+      unitId:
+        $ref: '#/definitions/Int'
+        description: 'The unit id of the power analyzer.'
+      voltageL1N:
+        type: number
+        description: "Power analyzer metrics. \n V, 19000"
+      voltageL2N:
+        type: number
+        description: 'V, 19002'
+      voltageL3N:
+        type: number
+        description: 'V, 19004'
+      currentIL1:
+        type: number
+        description: 'A, 19012'
+      currentIL2:
+        type: number
+        description: 'A, 19014'
+      currentIL3:
+        type: number
+        description: 'A, 19016'
+      currentSum:
+        type: number
+        description: 'A, 19018'
+      realPowerP1L1N:
+        type: number
+        description: 'W, 19020'
+      realPowerP2L2N:
+        type: number
+        description: 'W, 19022'
+      realPowerP3L3N:
+        type: number
+        description: 'W, 19024'
+      realPowerSum:
+        type: number
+        description: 'W, 19026'
+      apparentPowerS1L1N:
+        type: number
+        description: 'VA, 19028'
+      apparentPowerS2L2N:
+        type: number
+        description: 'VA, 19030'
+      apparentPowerS3L3N:
+        type: number
+        description: 'VA, 19032'
+      apparentPowerSum:
+        type: number
+        description: 'VA, 19034'
+      reactivePowerQ1L1N:
+        type: number
+        description: 'var, 19036'
+      reactivePowerQ2L2N:
+        type: number
+        description: 'var, 19038    '
+      reactivePowerQ3L3N:
+        type: number
+        description: 'var, 19040'
+      reactivePowerSum:
+        type: number
+        description: 'var, 19042'
+      realEnergyL1:
+        type: number
+        description: 'Wh, 19054'
+      realEnergyL2:
+        type: number
+        description: 'Wh, 19056'
+      realEnergyL3:
+        type: number
+        description: 'Wh, 19058'
+      realEnergySum:
+        type: number
+        description: 'Wh 19060'
+      apparentEnergyL1:
+        type: number
+        description: 'VAh, 19078'
+      apparentEnergyL2:
+        type: number
+        description: 'VAh, 19080'
+      apparentEnergyL3:
+        type: number
+        description: 'VAh, 19082'
+      apparentEnergySum:
+        type: number
+        description: 'VAh, 19084'
+      reactiveEnergyL1:
+        type: number
+        description: 'varh, 19086'
+      reactiveEnergyL2:
+        type: number
+        description: 'varh, 19088'
+      reactiveEnergyL3:
+        type: number
+        description: 'varh, 19090'
+      reactiveEnergySum:
+        type: number
+        description: 'varh, 19092'
+    required:
+      - deviceId
+      - sortingCenter
+      - sorterNumber
+      - timestamp
+      - group
+      - carrier
+      - unitId
+      - voltageL1N
+      - voltageL2N
+      - voltageL3N
+      - currentIL1
+      - currentIL2
+      - currentIL3
+      - currentSum
+      - realPowerP1L1N
+      - realPowerP2L2N
+      - realPowerP3L3N
+      - realPowerSum
+      - apparentPowerS1L1N
+      - apparentPowerS2L2N
+      - apparentPowerS3L3N
+      - apparentPowerSum
+      - reactivePowerQ1L1N
+      - reactivePowerQ2L2N
+      - reactivePowerQ3L3N
+      - reactivePowerSum
+      - realEnergyL1
+      - realEnergyL2
+      - realEnergyL3
+      - realEnergySum
+      - apparentEnergyL1
+      - apparentEnergyL2
+      - apparentEnergyL3
+      - apparentEnergySum
+      - reactiveEnergyL1
+      - reactiveEnergyL2
+      - reactiveEnergyL3
+      - reactiveEnergySum
+    additionalProperties: false
+  RunProfileProcessedEvent:
+    type: object
+    properties:
+      deviceId:
+        type: string
+        description: 'MAC address of the sending device, e.g. 2EC8957302CA'
+        pattern: '[0-9,A-F]{12}'
+      sortingCenter:
+        $ref: '#/definitions/SortingCenter'
+        description: "The sorting center id, e.g. \"HRK\" for BPZ Härkingen\r\nTODO Use sortingLocationKey instead -> clarify with jeanrichardm"
+      sorterNumber:
+        $ref: '#/definitions/Int'
+        description: "The sorter number (unique for the sorting center).\r\nTODO Use sortingUnitKey & sorterKey instead -> clarify with jeanrichardm"
+        minimum: 1
+        maximum: 9
+      timestamp:
+        $ref: '#/definitions/DateTime'
+        description: 'Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00'
+      serialNumber:
+        type: string
+        description: 'The serial number of the carrier.'
+        pattern: '[0-9,A-Z,a-z]{10} '
+      group:
+        $ref: '#/definitions/Int'
+        description: 'The group id of the carrier.'
+      carrier:
+        $ref: '#/definitions/Int'
+        description: 'The carrier id.'
+      profileId:
+        $ref: '#/definitions/Int'
+        description: 'The id of the processed RunProfile.'
+      state:
+        $ref: '#/definitions/State'
+        description: 'Resulting state of the RunProfile execution.'
+      errors:
+        type: array
+        items:
+          $ref: '#/definitions/Error'
+        description: "Errors resulting from the RunProfile execution (state = CSS_ERROR), \r\ne.g. over / under voltage, over temperature, stalled motor, etc. conditions."
+    required:
+      - deviceId
+      - sortingCenter
+      - sorterNumber
+      - timestamp
+      - serialNumber
+      - group
+      - carrier
+      - profileId
+      - state
+      - errors
+    additionalProperties: false
+  SortingCenter:
+    type: string
+    enum:
+      - HRK
+      - VET
+      - CAD
+      - UTZ
+      - PRA
+  State:
+    type: string
+    enum:
+      - PROCESSED
+      - WRONG_MODE
+      - FORMAT_ERROR
+      - CANCELLED_BY_MC
+      - DENIED_BY_CCS
+      - UNKNOWN_PROFILE_ID
+      - TIMING_TO_LATE
+      - TIMEOUT
+      - CCS_ERROR
+      - CCS_IS_BUSY
+      - GENERAL_ERROR
