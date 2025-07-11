@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "definitions": {},
+  "type": "string",
+  "enum": [
+    "UNKNOWN",
+    "INITIALIZATION",
+    "SYNCHRONIZATION",
+    "CCS_SETUP",
+    "FIRMWARE_UPDATE",
+    "READY",
+    "INTERNAL_ERROR",
+    "COMMUNICATION_ERROR",
+    "CCS_ERROR"
+  ],
+  "$id": "#State",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.State",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

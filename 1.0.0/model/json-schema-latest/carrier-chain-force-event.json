@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "definitions": {
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "pattern": "[0-9,a-f]",
+      "required": true
+    },
+    "sortingUnitKey": {
+      "$ref": "sorting-unit.json",
+      "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz.",
+      "required": true
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00.",
+      "required": true
+    },
+    "groupId": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier.",
+      "required": true
+    },
+    "carrierId": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id.",
+      "required": true
+    },
+    "position": {
+      "$ref": "#/definitions/Int",
+      "description": "The position in mm of the CCM on the sorting unit.",
+      "required": true
+    },
+    "sensorId": {
+      "$ref": "#/definitions/Int",
+      "description": "The sensor id of the acceleration sensor.",
+      "required": true
+    },
+    "sorterSpeed": {
+      "$ref": "#/definitions/Int",
+      "description": "The current sorter speed in mm/s.",
+      "required": true
+    },
+    "force": {
+      "type": "number",
+      "description": "Force in Newton measured at the chain force sensor.",
+      "required": true
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingUnitKey",
+    "timestamp",
+    "groupId",
+    "carrierId",
+    "position",
+    "sensorId",
+    "sorterSpeed",
+    "force"
+  ],
+  "additionalProperties": false,
+  "$id": "#CarrierChainForceEvent",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CarrierChainForceEvent",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

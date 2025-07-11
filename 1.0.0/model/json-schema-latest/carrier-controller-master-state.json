@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "definitions": {
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "pattern": "[0-9,a-f]",
+      "required": true
+    },
+    "sortingUnitKey": {
+      "$ref": "sorting-unit.json",
+      "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz.",
+      "required": true
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00.",
+      "required": true
+    },
+    "serialNumber": {
+      "type": "string",
+      "description": "The serial number of the carrier.",
+      "pattern": "[0-9,A-Z,a-z]{10}",
+      "required": true
+    },
+    "groupId": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier.",
+      "required": true
+    },
+    "carrierId": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id.",
+      "required": true
+    },
+    "connected": {
+      "type": "boolean",
+      "description": "True, if updates have been received from the CCM within the last 60 seconds.",
+      "required": true
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "ccm-error.json"
+      },
+      "description": "Errors received from CCM.",
+      "required": true
+    },
+    "infos": {
+      "type": "array",
+      "items": {
+        "$ref": "ccm-info.json"
+      },
+      "description": "Infos received from CCM.",
+      "required": true
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingUnitKey",
+    "timestamp",
+    "serialNumber",
+    "groupId",
+    "carrierId",
+    "connected",
+    "errors",
+    "infos"
+  ],
+  "additionalProperties": false,
+  "$id": "#CarrierControllerMasterState",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CarrierControllerMasterState",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "pattern": "[0-9,a-f]"
+    },
+    "sortingUnitKey": {
+      "$ref": "sorting-unit.json",
+      "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+    },
+    "groupId": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier."
+    },
+    "carrierId": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id."
+    },
+    "unitId": {
+      "$ref": "#/definitions/Int",
+      "description": "The unit id of the power analyzer."
+    },
+    "voltageL1N": {
+      "type": "number",
+      "description": "Voltage L1-N in volts."
+    },
+    "voltageL2N": {
+      "type": "number",
+      "description": "Voltage L2-N in volts."
+    },
+    "voltageL3N": {
+      "type": "number",
+      "description": "Voltage L3-N in volts."
+    },
+    "currentIL1": {
+      "type": "number",
+      "description": "Current I L1 in amperes."
+    },
+    "currentIL2": {
+      "type": "number",
+      "description": "Current I L2 in amperes."
+    },
+    "currentIL3": {
+      "type": "number",
+      "description": "Current I L3 in amperes."
+    },
+    "currentSum": {
+      "type": "number",
+      "description": "Total current in amperes."
+    },
+    "realPowerP1L1N": {
+      "type": "number",
+      "description": "Active power P1 L1-N in watts."
+    },
+    "realPowerP2L2N": {
+      "type": "number",
+      "description": "Active power P2 L2-N in watts."
+    },
+    "realPowerP3L3N": {
+      "type": "number",
+      "description": "Active power P3 L3-N in watts."
+    },
+    "realPowerSum": {
+      "type": "number",
+      "description": "Total active power in watts."
+    },
+    "apparentPowerS1L1N": {
+      "type": "number",
+      "description": "Apparent power S1 L1-N in VA."
+    },
+    "apparentPowerS2L2N": {
+      "type": "number",
+      "description": "Apparent power S2 L2-N in VA."
+    },
+    "apparentPowerS3L3N": {
+      "type": "number",
+      "description": "Apparent power S3 L3-N in VA."
+    },
+    "apparentPowerSum": {
+      "type": "number",
+      "description": "Total apparent power in VA."
+    },
+    "reactivePowerQ1L1N": {
+      "type": "number",
+      "description": "Reactive power Q1 L1-N in var."
+    },
+    "reactivePowerQ2L2N": {
+      "type": "number",
+      "description": "Reactive power Q2 L2-N in var."
+    },
+    "reactivePowerQ3L3N": {
+      "type": "number",
+      "description": "Reactive power Q3 L3-N in var."
+    },
+    "reactivePowerSum": {
+      "type": "number",
+      "description": "Total reactive power in var."
+    },
+    "realEnergyL1": {
+      "type": "number",
+      "description": "Active energy L1 in Wh."
+    },
+    "realEnergyL2": {
+      "type": "number",
+      "description": "Active energy L2 in Wh."
+    },
+    "realEnergyL3": {
+      "type": "number",
+      "description": "Active energy L3 in Wh."
+    },
+    "realEnergySum": {
+      "type": "number",
+      "description": "Total active energy in Wh."
+    },
+    "apparentEnergyL1": {
+      "type": "number",
+      "description": "Apparent energy L1 in VAh."
+    },
+    "apparentEnergyL2": {
+      "type": "number",
+      "description": "Apparent energy L2 in VAh."
+    },
+    "apparentEnergyL3": {
+      "type": "number",
+      "description": "Apparent energy L3 in VAh."
+    },
+    "apparentEnergySum": {
+      "type": "number",
+      "description": "Total apparent energy in VAh."
+    },
+    "reactiveEnergyL1": {
+      "type": "number",
+      "description": "Reactive energy L1 in varh."
+    },
+    "reactiveEnergyL2": {
+      "type": "number",
+      "description": "Reactive energy L2 in varh."
+    },
+    "reactiveEnergyL3": {
+      "type": "number",
+      "description": "Reactive energy L3 in varh."
+    },
+    "reactiveEnergySum": {
+      "type": "number",
+      "description": "Total reactive energy in varh."
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingUnitKey",
+    "timestamp",
+    "groupId",
+    "carrierId",
+    "unitId",
+    "voltageL1N",
+    "voltageL2N",
+    "voltageL3N",
+    "currentIL1",
+    "currentIL2",
+    "currentIL3",
+    "currentSum",
+    "realPowerP1L1N",
+    "realPowerP2L2N",
+    "realPowerP3L3N",
+    "realPowerSum",
+    "apparentPowerS1L1N",
+    "apparentPowerS2L2N",
+    "apparentPowerS3L3N",
+    "apparentPowerSum",
+    "reactivePowerQ1L1N",
+    "reactivePowerQ2L2N",
+    "reactivePowerQ3L3N",
+    "reactivePowerSum",
+    "realEnergyL1",
+    "realEnergyL2",
+    "realEnergyL3",
+    "realEnergySum",
+    "apparentEnergyL1",
+    "apparentEnergyL2",
+    "apparentEnergyL3",
+    "apparentEnergySum",
+    "reactiveEnergyL1",
+    "reactiveEnergyL2",
+    "reactiveEnergyL3",
+    "reactiveEnergySum"
+  ],
+  "additionalProperties": false,
+  "id": "PowerAnalyzerEvent",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.PowerAnalyzerEvent",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}
