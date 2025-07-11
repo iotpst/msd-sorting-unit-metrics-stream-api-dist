@@ -40,8 +40,8 @@
       "required": true
     },
     "position": {
-      "$ref": "#/definitions/Int",
-      "description": "The position in mm of the CCM on the sorting unit.",
+      "type": "number",
+      "description": "The position in meter of the CCM on the sorting unit.",
       "required": true
     },
     "sensorId": {
@@ -50,8 +50,8 @@
       "required": true
     },
     "sorterSpeed": {
-      "$ref": "#/definitions/Int",
-      "description": "The current sorter speed in mm/s.",
+      "type": "number",
+      "description": "The current sorter speed in m/s.",
       "required": true
     },
     "force": {

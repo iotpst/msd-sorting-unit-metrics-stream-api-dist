@@ -23,16 +23,16 @@
       "description": "The carrier id."
     },
     "position": {
-      "$ref": "#/definitions/Int",
-      "description": "The position in mm of the CCM on the sorting unit."
+      "type": "number",
+      "description": "The position in meter of the CCM on the sorting unit."
     },
     "sensorId": {
       "$ref": "#/definitions/Int",
       "description": "The sensor id of the acceleration sensor."
     },
     "sorterSpeed": {
-      "$ref": "#/definitions/Int",
-      "description": "The current sorter speed in mm/s."
+      "type": "number",
+      "description": "The current sorter speed in m/s."
     },
     "force": {
       "type": "number",
@@ -51,8 +51,8 @@
     "force"
   ],
   "additionalProperties": false,
-  "id": "CarrierChainForceEvent",
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$id": "#CarrierChainForceEvent",
+  "$schema": "http://json-schema.org/draft-07/schema",
   "definitions": {
     "SortingUnit": {
       "type": "string",

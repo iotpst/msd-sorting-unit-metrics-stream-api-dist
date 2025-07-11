@@ -30,9 +30,9 @@ export interface CarrierChainForceEvent {
     carrierId: Int
 
     /**
-     * The position in mm of the CCM on the sorting unit.
+     * The position in meter of the CCM on the sorting unit.
      */
-    position: Int
+    position: number
 
     /**
      * The sensor id of the acceleration sensor.
@@ -40,9 +40,9 @@ export interface CarrierChainForceEvent {
     sensorId: Int
 
     /**
-     * The current sorter speed in mm/s.
+     * The current sorter speed in m/s.
      */
-    sorterSpeed: Int
+    sorterSpeed: number
 
     /**
      * Force in Newton measured at the chain force sensor.

@@ -6,7 +6,7 @@
     "contact": {
       "name": "bierier"
     },
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "host": "server:8080",
   "basePath": "MQTT",
@@ -191,8 +191,8 @@
           "description": "The carrier id."
         },
         "position": {
-          "$ref": "#/definitions/Int",
-          "description": "The position in mm of the CCM on the sorting unit."
+          "type": "number",
+          "description": "The position in meter of the CCM on the sorting unit."
         },
         "sensorId": {
           "$ref": "#/definitions/Int",
@@ -235,8 +235,8 @@
           "description": "Z-axis acceleration maximum in m/s^2."
         },
         "sorterSpeed": {
-          "$ref": "#/definitions/Int",
-          "description": "The current sorter speed in mm/s."
+          "type": "number",
+          "description": "The current sorter speed in m/s."
         },
         "connected": {
           "type": "boolean",
@@ -290,16 +290,16 @@
           "description": "The carrier id."
         },
         "position": {
-          "$ref": "#/definitions/Int",
-          "description": "The position in mm of the CCM on the sorting unit."
+          "type": "number",
+          "description": "The position in meter of the CCM on the sorting unit."
         },
         "sensorId": {
           "$ref": "#/definitions/Int",
           "description": "The sensor id of the acceleration sensor."
         },
         "sorterSpeed": {
-          "$ref": "#/definitions/Int",
-          "description": "The current sorter speed in mm/s."
+          "type": "number",
+          "description": "The current sorter speed in m/s."
         },
         "force": {
           "type": "number",

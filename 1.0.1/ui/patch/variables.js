@@ -1,6 +1,6 @@
 var variables={
   "name": "@ch-post-app-iotp-msd/msd-sorting-unit-metrics-stream-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MSD Sorting Unit Metrics Stream API",
   "scripts": {
     "start": "apikana start src dist",

@@ -6,7 +6,7 @@
     "contact": {
       "name": "bierier"
     },
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "host": "server:8080",
   "basePath": "MQTT",

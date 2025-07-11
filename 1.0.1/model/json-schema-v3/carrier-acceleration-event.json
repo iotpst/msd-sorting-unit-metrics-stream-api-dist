@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "$schema": "http://json-schema.org/draft-03/schema#",
   "definitions": {
     "DateTime": {
       "type": "string",
@@ -40,8 +40,8 @@
       "required": true
     },
     "position": {
-      "$ref": "#/definitions/Int",
-      "description": "The position in mm of the CCM on the sorting unit.",
+      "type": "number",
+      "description": "The position in meter of the CCM on the sorting unit.",
       "required": true
     },
     "sensorId": {
@@ -95,8 +95,8 @@
       "required": true
     },
     "sorterSpeed": {
-      "$ref": "#/definitions/Int",
-      "description": "The current sorter speed in mm/s.",
+      "type": "number",
+      "description": "The current sorter speed in m/s.",
       "required": true
     },
     "connected": {
@@ -105,28 +105,8 @@
       "required": true
     }
   },
-  "required": [
-    "deviceId",
-    "sortingUnitKey",
-    "timestamp",
-    "groupId",
-    "carrierId",
-    "position",
-    "sensorId",
-    "accelerationX",
-    "accelerationY",
-    "accelerationZ",
-    "accelerationXMin",
-    "accelerationYMin",
-    "accelerationZMin",
-    "accelerationXMax",
-    "accelerationYMax",
-    "accelerationZMax",
-    "sorterSpeed",
-    "connected"
-  ],
   "additionalProperties": false,
-  "$id": "#CarrierAccelerationEvent",
+  "id": "CarrierAccelerationEvent",
   "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CarrierAccelerationEvent",
   "javaInterfaces": [
     "java.io.Serializable"

@@ -23,8 +23,8 @@
       "description": "The carrier id."
     },
     "position": {
-      "$ref": "#/definitions/Int",
-      "description": "The position in mm of the CCM on the sorting unit."
+      "type": "number",
+      "description": "The position in meter of the CCM on the sorting unit."
     },
     "sensorId": {
       "$ref": "#/definitions/Int",
@@ -67,8 +67,8 @@
       "description": "Z-axis acceleration maximum in m/s^2."
     },
     "sorterSpeed": {
-      "$ref": "#/definitions/Int",
-      "description": "The current sorter speed in mm/s."
+      "type": "number",
+      "description": "The current sorter speed in m/s."
     },
     "connected": {
       "type": "boolean",
@@ -96,8 +96,8 @@
     "connected"
   ],
   "additionalProperties": false,
-  "$id": "#CarrierAccelerationEvent",
-  "$schema": "http://json-schema.org/draft-07/schema",
+  "id": "CarrierAccelerationEvent",
+  "$schema": "http://json-schema.org/draft-04/schema#",
   "definitions": {
     "SortingUnit": {
       "type": "string",

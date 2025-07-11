@@ -1,16 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "definitions": {
-    "DateTime": {
-      "type": "string",
-      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
-      "format": "date-time"
-    },
-    "Int": {
-      "type": "integer",
-      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
-    }
-  },
   "type": "object",
   "properties": {
     "deviceId": {
@@ -19,7 +7,7 @@
       "pattern": "[0-9,a-f]"
     },
     "sortingUnitKey": {
-      "$ref": "sorting-unit.json",
+      "$ref": "#/definitions/SortingUnit",
       "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz"
     },
     "timestamp": {
@@ -35,8 +23,8 @@
       "description": "The carrier id."
     },
     "position": {
-      "$ref": "#/definitions/Int",
-      "description": "The position in mm of the CCM on the sorting unit."
+      "type": "number",
+      "description": "The position in meter of the CCM on the sorting unit."
     },
     "sensorId": {
       "$ref": "#/definitions/Int",
@@ -79,8 +67,8 @@
       "description": "Z-axis acceleration maximum in m/s^2."
     },
     "sorterSpeed": {
-      "$ref": "#/definitions/Int",
-      "description": "The current sorter speed in mm/s."
+      "type": "number",
+      "description": "The current sorter speed in m/s."
     },
     "connected": {
       "type": "boolean",
@@ -108,9 +96,28 @@
     "connected"
   ],
   "additionalProperties": false,
-  "id": "CarrierAccelerationEvent",
-  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CarrierAccelerationEvent",
-  "javaInterfaces": [
-    "java.io.Serializable"
-  ]
+  "$id": "#CarrierAccelerationEvent",
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "definitions": {
+    "SortingUnit": {
+      "type": "string",
+      "enum": [
+        "HRK",
+        "P_VET_01",
+        "P_CAD_01",
+        "P_UTZ_01",
+        "P_PRA_01"
+      ],
+      "$id": "#SortingUnit"
+    },
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    }
+  }
 }
