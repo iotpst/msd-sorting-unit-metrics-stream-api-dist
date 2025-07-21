@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {},
+  "type": "string",
+  "enum": [
+    "CONTROLLER_MODULE_IN_SETUP_MODE",
+    "TIME_SYNCHRONIZATION_REQUIRED",
+    "WIRELESS_MODULE_IN_SCAN_MODE",
+    "MISSING_CCS_CONFIGURATION",
+    "RUNNING"
+  ],
+  "id": "CcmInfo",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CcmInfo",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

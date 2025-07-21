@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    }
+  },
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "pattern": "[0-9,a-f]"
+    },
+    "sortingUnitKey": {
+      "$ref": "sorting-unit.json",
+      "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+    },
+    "serialNumber": {
+      "type": "string",
+      "description": "The serial number of the carrier.",
+      "pattern": "[0-9,A-Z,a-z]{10}"
+    },
+    "groupId": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier."
+    },
+    "carrierId": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id."
+    },
+    "state": {
+      "$ref": "state.json",
+      "description": "The current state of the carrier controller slave."
+    },
+    "upTime": {
+      "$ref": "#/definitions/Int",
+      "description": "Total runtime of the CCS since last boot in seconds."
+    },
+    "dcBusVoltage": {
+      "type": "number",
+      "description": "DC bus voltage in volt."
+    },
+    "temperature": {
+      "type": "number",
+      "description": "Temperature in the controller in degrees Celsius."
+    },
+    "connected": {
+      "type": "boolean",
+      "description": "True, if updates have been received from the CCM within the last 60 seconds."
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "ccs-error.json"
+      },
+      "description": "Errors received from the CCS."
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingUnitKey",
+    "timestamp",
+    "serialNumber",
+    "groupId",
+    "carrierId",
+    "state",
+    "upTime",
+    "dcBusVoltage",
+    "temperature",
+    "connected",
+    "errors"
+  ],
+  "additionalProperties": false,
+  "id": "CarrierControllerSlaveState",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CarrierControllerSlaveState",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "pattern": "[0-9,a-f]"
+    },
+    "sortingUnitKey": {
+      "$ref": "#/definitions/SortingUnit",
+      "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz"
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+    },
+    "groupId": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier."
+    },
+    "carrierId": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id."
+    },
+    "position": {
+      "type": "number",
+      "description": "The position in meter of the CCM on the sorting unit."
+    },
+    "sensorId": {
+      "$ref": "#/definitions/Int",
+      "description": "The sensor id of the acceleration sensor."
+    },
+    "accelerationX": {
+      "type": "number",
+      "description": "X-axis acceleration in m/s^2."
+    },
+    "accelerationY": {
+      "type": "number",
+      "description": "Y-axis acceleration in m/s^2."
+    },
+    "accelerationZ": {
+      "type": "number",
+      "description": "Z-axis acceleration in m/s^2."
+    },
+    "accelerationXMin": {
+      "type": "number",
+      "description": "X-axis acceleration minimum in m/s^2."
+    },
+    "accelerationYMin": {
+      "type": "number",
+      "description": "Y-axis acceleration minimum in m/s^2."
+    },
+    "accelerationZMin": {
+      "type": "number",
+      "description": "Z-axis acceleration minimum in m/s^2."
+    },
+    "accelerationXMax": {
+      "type": "number",
+      "description": "X-axis acceleration maximum in m/s^2."
+    },
+    "accelerationYMax": {
+      "type": "number",
+      "description": "Y-axis acceleration maximum in m/s^2."
+    },
+    "accelerationZMax": {
+      "type": "number",
+      "description": "Z-axis acceleration maximum in m/s^2."
+    },
+    "sorterSpeed": {
+      "type": "number",
+      "description": "The current sorter speed in m/s."
+    },
+    "connected": {
+      "type": "boolean",
+      "description": "True, if updates have been received from the CCM within the last 60 seconds."
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingUnitKey",
+    "timestamp",
+    "groupId",
+    "carrierId",
+    "position",
+    "sensorId",
+    "accelerationX",
+    "accelerationY",
+    "accelerationZ",
+    "accelerationXMin",
+    "accelerationYMin",
+    "accelerationZMin",
+    "accelerationXMax",
+    "accelerationYMax",
+    "accelerationZMax",
+    "sorterSpeed",
+    "connected"
+  ],
+  "additionalProperties": false,
+  "id": "CarrierAccelerationEvent",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "SortingUnit": {
+      "type": "string",
+      "enum": [
+        "HRK",
+        "P_VET_01",
+        "P_CAD_01",
+        "P_UTZ_01",
+        "P_PRA_01"
+      ],
+      "$id": "#SortingUnit"
+    },
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    }
+  }
+}

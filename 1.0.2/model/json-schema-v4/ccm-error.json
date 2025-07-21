@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {},
+  "type": "string",
+  "enum": [
+    "GENERAL",
+    "MASTER_BUS_OUT",
+    "MASTER_BUS_IN",
+    "CAN_BUS_MODULE",
+    "WIRELESS_MODULE",
+    "POSITION",
+    "MC_COMMUNICATION_MODULE"
+  ],
+  "id": "CcmError",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CcmError",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}
