@@ -1,0 +1,789 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MSD Sorting Unit Metrics Stream API",
+    "description": "Exposes metrics of a sorting unit.",
+    "contact": {
+      "name": "bierier"
+    },
+    "version": "1.0.3"
+  },
+  "host": "server:8080",
+  "basePath": "MQTT",
+  "paths": {
+    "app.iotp.msd.sorting.unit.metrics.CarrierControllerMaster-state": {
+      "get": {
+        "summary": "Carrier Controller Master state",
+        "description": "Shows the current state of a carrier controller master of the sorting unit.",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierControllerMasterState"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      },
+      "x-topic-configuration": {
+        "Topic": "post/msd/{env}/{deviceId}/metrics/inbound/carrier-controller-master-state"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.CarrierControllerSlave-state": {
+      "get": {
+        "summary": "Carrier Controller Slave state",
+        "description": "Shows the current state of a carrier controller slave of the sorting unit.",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierControllerSlaveState"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      },
+      "x-topic-configuration": {
+        "Topic": "post/msd/{env}/{deviceId}/metrics/inbound/carrier-controller-slave-state"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.CarrierAcceleration-event": {
+      "get": {
+        "summary": "Accleration metrics of a carrier",
+        "description": "Acceleration metrics of a carrier in the sorting unit.",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierAccelerationEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      },
+      "x-topic-configuration": {
+        "Topic": "post/msd/{env}/{deviceId}/metrics/inbound/carrier-acceleration-event"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.CarrierChainForce-event": {
+      "get": {
+        "summary": "Force measured on chain of carriers",
+        "description": "Shows the current force measured in the chain of carriers",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/CarrierChainForceEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      },
+      "x-topic-configuration": {
+        "Topic": "post/msd/{env}/{deviceId}/metrics/inbound/carrier-chain-force-event"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.PowerAnalyzer-event": {
+      "get": {
+        "summary": "Power consumption metrics of the sorting unit",
+        "description": "A power analyzer measures the current, voltage, power and energy consumption metrics of the sorting unit.",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/PowerAnalyzerEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      },
+      "x-topic-configuration": {
+        "Topic": "post/msd/{env}/{deviceId}/metrics/inbound/power-analyzer-event"
+      }
+    },
+    "app.iotp.msd.sorting.unit.metrics.RunProfileProcessed-event": {
+      "get": {
+        "summary": "Result of a RunProfile execution",
+        "description": "The motor controller will trigger a profile execution by sending the RunProfile message. When the RunProfile  was executed by the carrier controller slave, a RunProfileProcessed message with the resulting execution state is returned.\n",
+        "tags": [
+          "app.iotp.msd.sorting.unit.metrics"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "array",
+              "$ref": "#/definitions/RunProfileProcessedEvent"
+            }
+          }
+        }
+      },
+      "x-data": {
+        "confidentiality": "C1",
+        "classification": "P0"
+      },
+      "x-topic-configuration": {
+        "Topic": "post/msd/{env}/{deviceId}/metrics/inbound/run-profile-processed-event"
+      }
+    }
+  },
+  "definitions": {
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    },
+    "CarrierAccelerationEvent": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+          "pattern": "[0-9,a-f]"
+        },
+        "sortingUnitKey": {
+          "$ref": "#/definitions/SortingUnit",
+          "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz"
+        },
+        "timestamp": {
+          "$ref": "#/definitions/DateTime",
+          "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+        },
+        "groupId": {
+          "$ref": "#/definitions/Int",
+          "description": "The group id of the carrier."
+        },
+        "carrierId": {
+          "$ref": "#/definitions/Int",
+          "description": "The carrier id."
+        },
+        "position": {
+          "type": "number",
+          "description": "The position in meter of the CCM on the sorting unit."
+        },
+        "sensorId": {
+          "$ref": "#/definitions/Int",
+          "description": "The sensor id of the acceleration sensor."
+        },
+        "accelerationX": {
+          "type": "number",
+          "description": "X-axis acceleration in m/s^2."
+        },
+        "accelerationY": {
+          "type": "number",
+          "description": "Y-axis acceleration in m/s^2."
+        },
+        "accelerationZ": {
+          "type": "number",
+          "description": "Z-axis acceleration in m/s^2."
+        },
+        "accelerationXMin": {
+          "type": "number",
+          "description": "X-axis acceleration minimum in m/s^2."
+        },
+        "accelerationYMin": {
+          "type": "number",
+          "description": "Y-axis acceleration minimum in m/s^2."
+        },
+        "accelerationZMin": {
+          "type": "number",
+          "description": "Z-axis acceleration minimum in m/s^2."
+        },
+        "accelerationXMax": {
+          "type": "number",
+          "description": "X-axis acceleration maximum in m/s^2."
+        },
+        "accelerationYMax": {
+          "type": "number",
+          "description": "Y-axis acceleration maximum in m/s^2."
+        },
+        "accelerationZMax": {
+          "type": "number",
+          "description": "Z-axis acceleration maximum in m/s^2."
+        },
+        "sorterSpeed": {
+          "type": "number",
+          "description": "The current sorter speed in m/s."
+        },
+        "connected": {
+          "type": "boolean",
+          "description": "True, if updates have been received from the CCM within the last 60 seconds."
+        }
+      },
+      "required": [
+        "deviceId",
+        "sortingUnitKey",
+        "timestamp",
+        "groupId",
+        "carrierId",
+        "position",
+        "sensorId",
+        "accelerationX",
+        "accelerationY",
+        "accelerationZ",
+        "accelerationXMin",
+        "accelerationYMin",
+        "accelerationZMin",
+        "accelerationXMax",
+        "accelerationYMax",
+        "accelerationZMax",
+        "sorterSpeed",
+        "connected"
+      ],
+      "additionalProperties": false
+    },
+    "CarrierChainForceEvent": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+          "pattern": "[0-9,a-f]"
+        },
+        "sortingUnitKey": {
+          "$ref": "#/definitions/SortingUnit",
+          "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+        },
+        "timestamp": {
+          "$ref": "#/definitions/DateTime",
+          "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+        },
+        "groupId": {
+          "$ref": "#/definitions/Int",
+          "description": "The group id of the carrier."
+        },
+        "carrierId": {
+          "$ref": "#/definitions/Int",
+          "description": "The carrier id."
+        },
+        "position": {
+          "type": "number",
+          "description": "The position in meter of the CCM on the sorting unit."
+        },
+        "sensorId": {
+          "$ref": "#/definitions/Int",
+          "description": "The sensor id of the acceleration sensor."
+        },
+        "sorterSpeed": {
+          "type": "number",
+          "description": "The current sorter speed in m/s."
+        },
+        "force": {
+          "type": "number",
+          "description": "Force in Newton measured at the chain force sensor."
+        },
+        "connected": {
+          "type": "boolean",
+          "description": "True, if updates have been received from the CCM within the last 60 seconds."
+        }
+      },
+      "required": [
+        "deviceId",
+        "sortingUnitKey",
+        "timestamp",
+        "groupId",
+        "carrierId",
+        "position",
+        "sensorId",
+        "sorterSpeed",
+        "force",
+        "connected"
+      ],
+      "additionalProperties": false
+    },
+    "CarrierControllerMasterState": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+          "pattern": "[0-9,a-f]"
+        },
+        "sortingUnitKey": {
+          "$ref": "#/definitions/SortingUnit",
+          "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+        },
+        "timestamp": {
+          "$ref": "#/definitions/DateTime",
+          "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the carrier.",
+          "pattern": "[0-9,A-Z,a-z]{10}"
+        },
+        "groupId": {
+          "$ref": "#/definitions/Int",
+          "description": "The group id of the carrier."
+        },
+        "carrierId": {
+          "$ref": "#/definitions/Int",
+          "description": "The carrier id."
+        },
+        "connected": {
+          "type": "boolean",
+          "description": "True, if updates have been received from the CCM within the last 60 seconds."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CcmError"
+          },
+          "description": "Errors received from CCM."
+        },
+        "infos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CcmInfo"
+          },
+          "description": "Infos received from CCM."
+        }
+      },
+      "required": [
+        "deviceId",
+        "sortingUnitKey",
+        "timestamp",
+        "serialNumber",
+        "groupId",
+        "carrierId",
+        "connected",
+        "errors",
+        "infos"
+      ],
+      "additionalProperties": false
+    },
+    "CarrierControllerSlaveState": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+          "pattern": "[0-9,a-f]"
+        },
+        "sortingUnitKey": {
+          "$ref": "#/definitions/SortingUnit",
+          "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+        },
+        "timestamp": {
+          "$ref": "#/definitions/DateTime",
+          "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the carrier.",
+          "pattern": "[0-9,A-Z,a-z]{10}"
+        },
+        "groupId": {
+          "$ref": "#/definitions/Int",
+          "description": "The group id of the carrier."
+        },
+        "carrierId": {
+          "$ref": "#/definitions/Int",
+          "description": "The carrier id."
+        },
+        "state": {
+          "$ref": "#/definitions/CcsState",
+          "description": "The current state of the carrier controller slave."
+        },
+        "upTime": {
+          "$ref": "#/definitions/Int",
+          "description": "Total runtime of the CCS since last boot in seconds."
+        },
+        "dcBusVoltage": {
+          "type": "number",
+          "description": "DC bus voltage in volt."
+        },
+        "temperature": {
+          "type": "number",
+          "description": "Temperature in the controller in degrees Celsius."
+        },
+        "connected": {
+          "type": "boolean",
+          "description": "True, if updates have been received from the CCM within the last 60 seconds."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CcsError"
+          },
+          "description": "Errors received from the CCS."
+        }
+      },
+      "required": [
+        "deviceId",
+        "sortingUnitKey",
+        "timestamp",
+        "serialNumber",
+        "groupId",
+        "carrierId",
+        "state",
+        "upTime",
+        "dcBusVoltage",
+        "temperature",
+        "connected",
+        "errors"
+      ],
+      "additionalProperties": false
+    },
+    "CcmError": {
+      "type": "string",
+      "enum": [
+        "GENERAL",
+        "MASTER_BUS_OUT",
+        "MASTER_BUS_IN",
+        "CAN_BUS_MODULE",
+        "WIRELESS_MODULE",
+        "POSITION",
+        "MC_COMMUNICATION_MODULE"
+      ]
+    },
+    "CcmInfo": {
+      "type": "string",
+      "enum": [
+        "CONTROLLER_MODULE_IN_SETUP_MODE",
+        "TIME_SYNCHRONIZATION_REQUIRED",
+        "WIRELESS_MODULE_IN_SCAN_MODE",
+        "MISSING_CCS_CONFIGURATION",
+        "RUNNING"
+      ]
+    },
+    "CcsError": {
+      "type": "string",
+      "enum": [
+        "OVER_CURRENT_PHASE",
+        "OVER_CURRENT_PHASE_RMS",
+        "OVER_VOLTAGE_DC_POWER_BUS",
+        "UNDER_VOLTAGE_DC_POWER_BUS",
+        "NO_START_VOLTAGE_DC_POWER_BUS",
+        "OVER_TEMPERATURE",
+        "INVALID_HALL_SENSOR_SIGNAL",
+        "MOTOR_STALLED",
+        "TIMEOUT_FINDING_HOME_POSITION",
+        "POSITIONING_ERROR_MOVING",
+        "POSITIONING_ERROR_NOT_MOVING",
+        "TIMEOUT_SETTLING",
+        "CAN_BUS",
+        "INTERNAL",
+        "MOTOR_PHASE_SHORT_CIRCUIT"
+      ]
+    },
+    "CcsState": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "INITIALIZATION",
+        "SYNCHRONIZATION",
+        "CCS_SETUP",
+        "FIRMWARE_UPDATE",
+        "READY",
+        "INTERNAL_ERROR",
+        "COMMUNICATION_ERROR",
+        "CCS_ERROR"
+      ]
+    },
+    "PowerAnalyzerEvent": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+          "pattern": "[0-9,a-f]"
+        },
+        "sortingUnitKey": {
+          "$ref": "#/definitions/SortingUnit",
+          "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+        },
+        "timestamp": {
+          "$ref": "#/definitions/DateTime",
+          "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+        },
+        "unitId": {
+          "$ref": "#/definitions/Int",
+          "description": "The unit id of the power analyzer."
+        },
+        "voltageL1N": {
+          "type": "number",
+          "description": "Voltage L1-N in volts."
+        },
+        "voltageL2N": {
+          "type": "number",
+          "description": "Voltage L2-N in volts."
+        },
+        "voltageL3N": {
+          "type": "number",
+          "description": "Voltage L3-N in volts."
+        },
+        "currentIL1": {
+          "type": "number",
+          "description": "Current I L1 in amperes."
+        },
+        "currentIL2": {
+          "type": "number",
+          "description": "Current I L2 in amperes."
+        },
+        "currentIL3": {
+          "type": "number",
+          "description": "Current I L3 in amperes."
+        },
+        "currentSum": {
+          "type": "number",
+          "description": "Total current in amperes."
+        },
+        "realPowerP1L1N": {
+          "type": "number",
+          "description": "Active power P1 L1-N in watts."
+        },
+        "realPowerP2L2N": {
+          "type": "number",
+          "description": "Active power P2 L2-N in watts."
+        },
+        "realPowerP3L3N": {
+          "type": "number",
+          "description": "Active power P3 L3-N in watts."
+        },
+        "realPowerSum": {
+          "type": "number",
+          "description": "Total active power in watts."
+        },
+        "apparentPowerS1L1N": {
+          "type": "number",
+          "description": "Apparent power S1 L1-N in VA."
+        },
+        "apparentPowerS2L2N": {
+          "type": "number",
+          "description": "Apparent power S2 L2-N in VA."
+        },
+        "apparentPowerS3L3N": {
+          "type": "number",
+          "description": "Apparent power S3 L3-N in VA."
+        },
+        "apparentPowerSum": {
+          "type": "number",
+          "description": "Total apparent power in VA."
+        },
+        "reactivePowerQ1L1N": {
+          "type": "number",
+          "description": "Reactive power Q1 L1-N in var."
+        },
+        "reactivePowerQ2L2N": {
+          "type": "number",
+          "description": "Reactive power Q2 L2-N in var."
+        },
+        "reactivePowerQ3L3N": {
+          "type": "number",
+          "description": "Reactive power Q3 L3-N in var."
+        },
+        "reactivePowerSum": {
+          "type": "number",
+          "description": "Total reactive power in var."
+        },
+        "realEnergyL1": {
+          "type": "number",
+          "description": "Active energy L1 in Wh."
+        },
+        "realEnergyL2": {
+          "type": "number",
+          "description": "Active energy L2 in Wh."
+        },
+        "realEnergyL3": {
+          "type": "number",
+          "description": "Active energy L3 in Wh."
+        },
+        "realEnergySum": {
+          "type": "number",
+          "description": "Total active energy in Wh."
+        },
+        "apparentEnergyL1": {
+          "type": "number",
+          "description": "Apparent energy L1 in VAh."
+        },
+        "apparentEnergyL2": {
+          "type": "number",
+          "description": "Apparent energy L2 in VAh."
+        },
+        "apparentEnergyL3": {
+          "type": "number",
+          "description": "Apparent energy L3 in VAh."
+        },
+        "apparentEnergySum": {
+          "type": "number",
+          "description": "Total apparent energy in VAh."
+        },
+        "reactiveEnergyL1": {
+          "type": "number",
+          "description": "Reactive energy L1 in varh."
+        },
+        "reactiveEnergyL2": {
+          "type": "number",
+          "description": "Reactive energy L2 in varh."
+        },
+        "reactiveEnergyL3": {
+          "type": "number",
+          "description": "Reactive energy L3 in varh."
+        },
+        "reactiveEnergySum": {
+          "type": "number",
+          "description": "Total reactive energy in varh."
+        }
+      },
+      "required": [
+        "deviceId",
+        "sortingUnitKey",
+        "timestamp",
+        "unitId",
+        "voltageL1N",
+        "voltageL2N",
+        "voltageL3N",
+        "currentIL1",
+        "currentIL2",
+        "currentIL3",
+        "currentSum",
+        "realPowerP1L1N",
+        "realPowerP2L2N",
+        "realPowerP3L3N",
+        "realPowerSum",
+        "apparentPowerS1L1N",
+        "apparentPowerS2L2N",
+        "apparentPowerS3L3N",
+        "apparentPowerSum",
+        "reactivePowerQ1L1N",
+        "reactivePowerQ2L2N",
+        "reactivePowerQ3L3N",
+        "reactivePowerSum",
+        "realEnergyL1",
+        "realEnergyL2",
+        "realEnergyL3",
+        "realEnergySum",
+        "apparentEnergyL1",
+        "apparentEnergyL2",
+        "apparentEnergyL3",
+        "apparentEnergySum",
+        "reactiveEnergyL1",
+        "reactiveEnergyL2",
+        "reactiveEnergyL3",
+        "reactiveEnergySum"
+      ],
+      "additionalProperties": false
+    },
+    "RppState": {
+      "type": "string",
+      "enum": [
+        "PROCESSED",
+        "WRONG_MODE",
+        "FORMAT_ERROR",
+        "CANCELLED_BY_MC",
+        "DENIED_BY_CCS",
+        "UNKNOWN_PROFILE_ID",
+        "TIMING_TO_LATE",
+        "TIMEOUT",
+        "CCS_ERROR",
+        "CCS_BUSY",
+        "GENERAL_ERROR"
+      ]
+    },
+    "RunProfileProcessedEvent": {
+      "type": "object",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+          "pattern": "[0-9,a-f]"
+        },
+        "sortingUnitKey": {
+          "$ref": "#/definitions/SortingUnit",
+          "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+        },
+        "timestamp": {
+          "$ref": "#/definitions/DateTime",
+          "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+        },
+        "serialNumber": {
+          "type": "string",
+          "description": "The serial number of the carrier.",
+          "pattern": "[0-9,A-Z,a-z]{10}"
+        },
+        "groupId": {
+          "$ref": "#/definitions/Int",
+          "description": "The group id of the carrier."
+        },
+        "carrierId": {
+          "$ref": "#/definitions/Int",
+          "description": "The carrier id."
+        },
+        "profileId": {
+          "$ref": "#/definitions/Int",
+          "description": "The id of the processed RunProfile."
+        },
+        "state": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RppState"
+          },
+          "description": "Resulting state of the RunProfile execution."
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CcsError"
+          },
+          "description": "Errors resulting from the RunProfile execution (state = CSS_ERROR),\r\ne.g. over / under voltage, over temperature, stalled motor, etc. conditions."
+        }
+      },
+      "required": [
+        "deviceId",
+        "sortingUnitKey",
+        "timestamp",
+        "serialNumber",
+        "groupId",
+        "carrierId",
+        "profileId",
+        "state",
+        "errors"
+      ],
+      "additionalProperties": false
+    },
+    "SortingUnit": {
+      "type": "string",
+      "enum": [
+        "HRK",
+        "P_VET_01",
+        "P_CAD_01",
+        "P_UTZ_01",
+        "P_PRA_01"
+      ]
+    }
+  }
+}

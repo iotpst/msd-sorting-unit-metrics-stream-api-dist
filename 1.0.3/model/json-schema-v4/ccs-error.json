@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {},
+  "type": "string",
+  "enum": [
+    "OVER_CURRENT_PHASE",
+    "OVER_CURRENT_PHASE_RMS",
+    "OVER_VOLTAGE_DC_POWER_BUS",
+    "UNDER_VOLTAGE_DC_POWER_BUS",
+    "NO_START_VOLTAGE_DC_POWER_BUS",
+    "OVER_TEMPERATURE",
+    "INVALID_HALL_SENSOR_SIGNAL",
+    "MOTOR_STALLED",
+    "TIMEOUT_FINDING_HOME_POSITION",
+    "POSITIONING_ERROR_MOVING",
+    "POSITIONING_ERROR_NOT_MOVING",
+    "TIMEOUT_SETTLING",
+    "CAN_BUS",
+    "INTERNAL",
+    "MOTOR_PHASE_SHORT_CIRCUIT"
+  ],
+  "id": "CcsError",
+  "javaType": "ch.post.app.iotp.msd.sorting.unit.metrics.v1.CcsError",
+  "javaInterfaces": [
+    "java.io.Serializable"
+  ]
+}

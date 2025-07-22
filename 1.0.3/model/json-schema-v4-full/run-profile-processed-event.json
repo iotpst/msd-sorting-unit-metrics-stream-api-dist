@@ -1,0 +1,123 @@
+{
+  "type": "object",
+  "properties": {
+    "deviceId": {
+      "type": "string",
+      "description": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "pattern": "[0-9,a-f]"
+    },
+    "sortingUnitKey": {
+      "$ref": "#/definitions/SortingUnit",
+      "description": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz."
+    },
+    "timestamp": {
+      "$ref": "#/definitions/DateTime",
+      "description": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00."
+    },
+    "serialNumber": {
+      "type": "string",
+      "description": "The serial number of the carrier.",
+      "pattern": "[0-9,A-Z,a-z]{10}"
+    },
+    "groupId": {
+      "$ref": "#/definitions/Int",
+      "description": "The group id of the carrier."
+    },
+    "carrierId": {
+      "$ref": "#/definitions/Int",
+      "description": "The carrier id."
+    },
+    "profileId": {
+      "$ref": "#/definitions/Int",
+      "description": "The id of the processed RunProfile."
+    },
+    "state": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RppState"
+      },
+      "description": "Resulting state of the RunProfile execution."
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/CcsError"
+      },
+      "description": "Errors resulting from the RunProfile execution (state = CSS_ERROR),\r\ne.g. over / under voltage, over temperature, stalled motor, etc. conditions."
+    }
+  },
+  "required": [
+    "deviceId",
+    "sortingUnitKey",
+    "timestamp",
+    "serialNumber",
+    "groupId",
+    "carrierId",
+    "profileId",
+    "state",
+    "errors"
+  ],
+  "additionalProperties": false,
+  "id": "RunProfileProcessedEvent",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {
+    "SortingUnit": {
+      "type": "string",
+      "enum": [
+        "HRK",
+        "P_VET_01",
+        "P_CAD_01",
+        "P_UTZ_01",
+        "P_PRA_01"
+      ],
+      "$id": "#SortingUnit"
+    },
+    "DateTime": {
+      "type": "string",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#string\">String @format date-time</a>,\nas defined by <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339, section 5.6</a>,\nfor example: <code>2014-05-22T10:42:42.542+00:00</code>.",
+      "format": "date-time"
+    },
+    "Int": {
+      "type": "integer",
+      "description": "<a href=\"https://swagger.io/docs/specification/data-models/data-types/#numbers\">Number @asType integer</a>"
+    },
+    "RppState": {
+      "type": "string",
+      "enum": [
+        "PROCESSED",
+        "WRONG_MODE",
+        "FORMAT_ERROR",
+        "CANCELLED_BY_MC",
+        "DENIED_BY_CCS",
+        "UNKNOWN_PROFILE_ID",
+        "TIMING_TO_LATE",
+        "TIMEOUT",
+        "CCS_ERROR",
+        "CCS_BUSY",
+        "GENERAL_ERROR"
+      ],
+      "$id": "#RppState"
+    },
+    "CcsError": {
+      "type": "string",
+      "enum": [
+        "OVER_CURRENT_PHASE",
+        "OVER_CURRENT_PHASE_RMS",
+        "OVER_VOLTAGE_DC_POWER_BUS",
+        "UNDER_VOLTAGE_DC_POWER_BUS",
+        "NO_START_VOLTAGE_DC_POWER_BUS",
+        "OVER_TEMPERATURE",
+        "INVALID_HALL_SENSOR_SIGNAL",
+        "MOTOR_STALLED",
+        "TIMEOUT_FINDING_HOME_POSITION",
+        "POSITIONING_ERROR_MOVING",
+        "POSITIONING_ERROR_NOT_MOVING",
+        "TIMEOUT_SETTLING",
+        "CAN_BUS",
+        "INTERNAL",
+        "MOTOR_PHASE_SHORT_CIRCUIT"
+      ],
+      "$id": "#CcsError"
+    }
+  }
+}

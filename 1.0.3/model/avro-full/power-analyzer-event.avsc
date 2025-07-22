@@ -1,0 +1,182 @@
+{
+  "namespace": "PowerAnalyzerEvent",
+  "name": "main",
+  "type": "record",
+  "fields": [
+    {
+      "name": "deviceId",
+      "doc": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "type": "string"
+    },
+    {
+      "name": "sortingUnitKey",
+      "doc": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz.",
+      "type": "string"
+    },
+    {
+      "name": "timestamp",
+      "doc": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00.",
+      "type": "string"
+    },
+    {
+      "name": "unitId",
+      "doc": "The unit id of the power analyzer.",
+      "type": "int"
+    },
+    {
+      "name": "voltageL1N",
+      "doc": "Voltage L1-N in volts.",
+      "type": "double"
+    },
+    {
+      "name": "voltageL2N",
+      "doc": "Voltage L2-N in volts.",
+      "type": "double"
+    },
+    {
+      "name": "voltageL3N",
+      "doc": "Voltage L3-N in volts.",
+      "type": "double"
+    },
+    {
+      "name": "currentIL1",
+      "doc": "Current I L1 in amperes.",
+      "type": "double"
+    },
+    {
+      "name": "currentIL2",
+      "doc": "Current I L2 in amperes.",
+      "type": "double"
+    },
+    {
+      "name": "currentIL3",
+      "doc": "Current I L3 in amperes.",
+      "type": "double"
+    },
+    {
+      "name": "currentSum",
+      "doc": "Total current in amperes.",
+      "type": "double"
+    },
+    {
+      "name": "realPowerP1L1N",
+      "doc": "Active power P1 L1-N in watts.",
+      "type": "double"
+    },
+    {
+      "name": "realPowerP2L2N",
+      "doc": "Active power P2 L2-N in watts.",
+      "type": "double"
+    },
+    {
+      "name": "realPowerP3L3N",
+      "doc": "Active power P3 L3-N in watts.",
+      "type": "double"
+    },
+    {
+      "name": "realPowerSum",
+      "doc": "Total active power in watts.",
+      "type": "double"
+    },
+    {
+      "name": "apparentPowerS1L1N",
+      "doc": "Apparent power S1 L1-N in VA.",
+      "type": "double"
+    },
+    {
+      "name": "apparentPowerS2L2N",
+      "doc": "Apparent power S2 L2-N in VA.",
+      "type": "double"
+    },
+    {
+      "name": "apparentPowerS3L3N",
+      "doc": "Apparent power S3 L3-N in VA.",
+      "type": "double"
+    },
+    {
+      "name": "apparentPowerSum",
+      "doc": "Total apparent power in VA.",
+      "type": "double"
+    },
+    {
+      "name": "reactivePowerQ1L1N",
+      "doc": "Reactive power Q1 L1-N in var.",
+      "type": "double"
+    },
+    {
+      "name": "reactivePowerQ2L2N",
+      "doc": "Reactive power Q2 L2-N in var.",
+      "type": "double"
+    },
+    {
+      "name": "reactivePowerQ3L3N",
+      "doc": "Reactive power Q3 L3-N in var.",
+      "type": "double"
+    },
+    {
+      "name": "reactivePowerSum",
+      "doc": "Total reactive power in var.",
+      "type": "double"
+    },
+    {
+      "name": "realEnergyL1",
+      "doc": "Active energy L1 in Wh.",
+      "type": "double"
+    },
+    {
+      "name": "realEnergyL2",
+      "doc": "Active energy L2 in Wh.",
+      "type": "double"
+    },
+    {
+      "name": "realEnergyL3",
+      "doc": "Active energy L3 in Wh.",
+      "type": "double"
+    },
+    {
+      "name": "realEnergySum",
+      "doc": "Total active energy in Wh.",
+      "type": "double"
+    },
+    {
+      "name": "apparentEnergyL1",
+      "doc": "Apparent energy L1 in VAh.",
+      "type": "double"
+    },
+    {
+      "name": "apparentEnergyL2",
+      "doc": "Apparent energy L2 in VAh.",
+      "type": "double"
+    },
+    {
+      "name": "apparentEnergyL3",
+      "doc": "Apparent energy L3 in VAh.",
+      "type": "double"
+    },
+    {
+      "name": "apparentEnergySum",
+      "doc": "Total apparent energy in VAh.",
+      "type": "double"
+    },
+    {
+      "name": "reactiveEnergyL1",
+      "doc": "Reactive energy L1 in varh.",
+      "type": "double"
+    },
+    {
+      "name": "reactiveEnergyL2",
+      "doc": "Reactive energy L2 in varh.",
+      "type": "double"
+    },
+    {
+      "name": "reactiveEnergyL3",
+      "doc": "Reactive energy L3 in varh.",
+      "type": "double"
+    },
+    {
+      "name": "reactiveEnergySum",
+      "doc": "Total reactive energy in varh.",
+      "type": "double"
+    }
+  ]
+}

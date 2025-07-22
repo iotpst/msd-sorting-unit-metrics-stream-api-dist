@@ -1,0 +1,66 @@
+{
+  "namespace": "RunProfileProcessedEvent",
+  "name": "main",
+  "type": "record",
+  "fields": [
+    {
+      "name": "deviceId",
+      "doc": "Hostname of the sending device (RevPi), e.g. \"ivtp20\".",
+      "type": "string"
+    },
+    {
+      "name": "sortingUnitKey",
+      "doc": "The sorting unit key, e.g. \"P_VET_01\" for RPZ Vetroz.",
+      "type": "string"
+    },
+    {
+      "name": "timestamp",
+      "doc": "Message timestamp. ISO 8601 Format, e.g. 2025-06-20T17:00:00+02:00.",
+      "type": "string"
+    },
+    {
+      "name": "serialNumber",
+      "doc": "The serial number of the carrier.",
+      "type": "string"
+    },
+    {
+      "name": "groupId",
+      "doc": "The group id of the carrier.",
+      "type": "int"
+    },
+    {
+      "name": "carrierId",
+      "doc": "The carrier id.",
+      "type": "int"
+    },
+    {
+      "name": "profileId",
+      "doc": "The id of the processed RunProfile.",
+      "type": "int"
+    },
+    {
+      "name": "state",
+      "doc": "Resulting state of the RunProfile execution.",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "state",
+          "doc": "",
+          "type": "string"
+        }
+      }
+    },
+    {
+      "name": "errors",
+      "doc": "Errors resulting from the RunProfile execution (state = CSS_ERROR),\r\ne.g. over / under voltage, over temperature, stalled motor, etc. conditions.",
+      "type": {
+        "type": "array",
+        "items": {
+          "name": "errors",
+          "doc": "",
+          "type": "string"
+        }
+      }
+    }
+  ]
+}
